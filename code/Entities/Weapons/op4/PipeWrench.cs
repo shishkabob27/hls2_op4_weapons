@@ -4,7 +4,7 @@ using XeNPC;
 [Library( "weapon_pipewrench" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_pipe_wrench.vmdl" )]
 [Title( "Pipe Wrench" ), Category( "Weapons" )]
-partial class PipeWrench : HLWeapon
+partial class PipeWrench : Weapon
 {
 	public override string ViewModelPath => "models/op4/weapons/view/v_pipe_wrench.vmdl";
 	public override string WorldModelPath => "models/op4/weapons/world/w_pipe_wrench.vmdl";

@@ -3,7 +3,7 @@ using SandboxEditor;
 [Library( "weapon_shockrifle" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/knife.vmdl" )]
 [Title( "Shock Roach" ), Category( "Weapons" )]
-class ShockRifle : HLWeapon
+class ShockRifle : Weapon
 {
 	public override string ViewModelPath => "models/op4/weapons/view/v_shock.vmdl";
 	public override string WorldModelPath => "models/op4/weapons/world/w_shock.vmdl";

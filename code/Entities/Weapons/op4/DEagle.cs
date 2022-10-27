@@ -3,7 +3,7 @@ using SandboxEditor;
 [Library( "weapon_eagle" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_desert_eagle.vmdl" )]
 [Title( "Desert Eagle" ), Category( "Weapons" )]
-partial class DEagle : HLWeapon
+partial class DEagle : Weapon
 {
 	public override string ViewModelPath => "models/op4/weapons/view/v_desert_eagle.vmdl";
 	public override string WorldModelPath => "models/op4/weapons/world/w_desert_eagle.vmdl";

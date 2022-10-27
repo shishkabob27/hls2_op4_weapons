@@ -1,7 +1,5 @@
 ﻿using Sandbox;
 
-[Library( "hl_hornet" )]
-[HideInEditor]
 public partial class ShockBeam : Entity
 {
 

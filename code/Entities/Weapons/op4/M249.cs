@@ -3,7 +3,7 @@ using SandboxEditor;
 [Library( "weapon_m249" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_saw.vmdl" )]
 [Title( "M249" ), Category( "Weapons" )]
-partial class M249 : HLWeapon
+partial class M249 : Weapon
 {
     public override string ViewModelPath => "models/op4/weapons/view/v_saw.vmdl";
 	public override string WorldModelPath => "models/op4/weapons/world/w_saw.vmdl";

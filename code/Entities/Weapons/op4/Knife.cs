@@ -4,7 +4,7 @@ using XeNPC;
 [Library( "weapon_knife" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_knife.vmdl" )]
 [Title( "Knife" ), Category( "Weapons" )]
-partial class Knife : HLWeapon
+partial class Knife : Weapon
 {
 	public static Model WorldModel = Model.Load( "models/op4/weapons/world/w_knife.vmdl" );
 	public override string ViewModelPath => "models/op4/weapons/view/v_knife.vmdl";
