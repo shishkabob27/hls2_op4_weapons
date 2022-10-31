@@ -17,7 +17,7 @@ partial class DEagle : Weapon
 	public override string AmmoIcon => "ui/ammo2.png";
 	public override string InventoryIcon => "/ui/op4/weapons/weapon_eagle.png";
 	public override string InventoryIconSelected => "/ui/op4/weapons/weapon_eagle_selected.png";
-	//LaserDot Dot;
+	LaserDot Dot;
 
 	[Net]
 	public bool isLaserOn { get; set; } = false;
@@ -27,11 +27,6 @@ partial class DEagle : Weapon
 
 		Model = Model.Load( "models/op4/weapons/world/w_desert_eagle.vmdl" );
 		AmmoClip = 7;
-	}
-
-	public override bool CanPrimaryAttack()
-	{
-		return base.CanPrimaryAttack();
 	}
 
 	public override void AttackPrimary()
@@ -83,13 +78,13 @@ partial class DEagle : Weapon
 		base.AttackSecondary();
 		if ( !isLaserOn && IsServer )
 		{
-			//Dot = new LaserDot();
+			Dot = new LaserDot();
 			isLaserOn = true;
 		}
 		else if ( IsServer )
 		{
-			//Dot.Delete();
-			//Dot = null;
+			Dot.Delete();
+			Dot = null;
 			isLaserOn = false;
 		}
 	}
@@ -98,14 +93,14 @@ partial class DEagle : Weapon
 	{
 		base.Simulate( owner );
 		if ( Owner is not HLPlayer ply ) return;
-		/*if ( Dot != null )
+		if ( Dot != null )
 		{
 			Dot.Position = Trace.Ray( ply.EyePosition, ply.EyePosition + ply.EyeRotation.Forward * 10000 )
 				.WithoutTags( "player" )
 				.Ignore( this )
 				.Run()
 				.EndPosition - ply.EyeRotation.Forward * 1;
-		}*/
+		}
 	}
 
 	public override void ActiveEnd( Entity ent, bool dropped )
@@ -114,8 +109,8 @@ partial class DEagle : Weapon
 
 		if ( isLaserOn && IsServer )
 		{
-			//Dot.Delete();
-			//Dot = null;
+			Dot.Delete();
+			Dot = null;
 			isLaserOn = false;
 		}
 	}
