@@ -3,7 +3,7 @@ using SandboxEditor;
 using XeNPC;
 [Library( "weapon_knife" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_knife.vmdl" )]
-[Title( "Knife" ), Category( "Weapons" )]
+[Title( "Knife" ), Category( "Weapons" ), MenuCategory( "Opposing Force" )]
 partial class Knife : Weapon
 {
 	public static Model WorldModel = Model.Load( "models/op4/weapons/world/w_knife.vmdl" );

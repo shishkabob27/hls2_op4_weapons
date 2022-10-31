@@ -3,7 +3,7 @@ using SandboxEditor;
 using XeNPC;
 [Library( "weapon_pipewrench" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_pipe_wrench.vmdl" )]
-[Title( "Pipe Wrench" ), Category( "Weapons" )]
+[Title( "Pipe Wrench" ), Category( "Weapons" ), MenuCategory( "Opposing Force" )]
 partial class PipeWrench : Weapon
 {
 	public override string ViewModelPath => "models/op4/weapons/view/v_pipe_wrench.vmdl";
