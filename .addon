@@ -19,6 +19,11 @@
       "RootNamespace": "hls2",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
       "NoWarn": "1701;1702;1591;"
-    }
+    },
+    "RenderMaxs": "0,0,0",
+    "RenderMins": "0,0,0",
+    "PhysicsMaxs": "0,0,0",
+    "PhysicsMins": "0,0,0",
+    "PrimaryAsset": ""
   }
 }
