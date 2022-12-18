@@ -1,5 +1,5 @@
 ﻿using Sandbox;
-using SandboxEditor;
+using Editor;
 using XeNPC;
 [Library( "weapon_knife" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_knife.vmdl" )]
@@ -43,7 +43,7 @@ partial class Knife : Weapon
 
 		// i didn't change anything i just really wanted to make the commit joke 
 
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
 		var forward = GetFiringRotation().Forward;
 		forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * 0.1f;
@@ -66,7 +66,7 @@ partial class Knife : Weapon
 				didHit = false;
 			}
 
-			if ( !IsServer ) continue;
+			if ( !Game.IsServer ) continue;
 			if ( !tr.Entity.IsValid() ) continue;
 
 			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 32, 10 )
@@ -98,7 +98,7 @@ partial class Knife : Weapon
 			TimeSincePrimaryAttack = 0.26f;
 			ViewModelEntity?.SetAnimParameter( "attack_has_hit", true );
 
-			if ( hitEntity != this && hitEntity is NPC && IsServer )
+			if ( hitEntity != this && hitEntity is NPC && Game.IsServer )
 			{
 				// recreate that funny glitch :)
 				if ( hitEntity.LifeState == LifeState.Dead )
@@ -143,7 +143,7 @@ partial class Knife : Weapon
 					//ps.SetPosition(0, endPos);
 				}
 			}
-			else if ( hitEntity is not NPC && IsServer )
+			else if ( hitEntity is not NPC && Game.IsServer )
 			{
 				using ( Prediction.Off() )
 					PlaySound( "sounds/op4/weapons/knife_hit_wall.sound" );
@@ -157,15 +157,15 @@ partial class Knife : Weapon
 		( Owner as AnimatedEntity ).SetAnimParameter( "b_attack", true );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", (int)HLCombat.HoldTypes.Swing ); // TODO this is shit
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		SetHoldType(HLCombat.HoldTypes.Swing, anim);
+		//anim.SetAnimParameter( "aim_body_weight", 1.0f );
 
 		if ( Owner.IsValid() )
 		{
-			ViewModelEntity?.SetAnimParameter( "b_grounded", Owner.GroundEntity.IsValid() );
-			ViewModelEntity?.SetAnimParameter( "aim_pitch", Owner.EyeRotation.Pitch() );
+			ViewModelEntity?.SetAnimParameter( "b_grounded", (Owner as HLPlayer).GroundEntity.IsValid() );
+			ViewModelEntity?.SetAnimParameter( "aim_pitch", (Owner as HLPlayer).EyeRotation.Pitch() );
 
 		}
 	}

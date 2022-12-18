@@ -1,5 +1,5 @@
 ﻿using Sandbox;
-using SandboxEditor;
+using Editor;
 [Library( "weapon_m249" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_saw.vmdl" )]
 [Title( "M249" ), Category( "Weapons" ), MenuCategory( "Opposing Force" )]
@@ -52,14 +52,14 @@ partial class M249 : Weapon
 		// Shoot the bullets
 		//
 		ShootBullet( 0.15f, 1.5f, 5.0f, 3.0f );
-		ViewPunch( 0, Rand.Float( -2, 2 ) );
+		ViewPunch( 0, Game.Random.Float( -2, 2 ) );
 
 	}
 
 	[ClientRpc]
 	protected override void ShootEffectsRPC()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		if ( Client.IsUsingVr )
 		{
@@ -81,10 +81,10 @@ partial class M249 : Weapon
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", (int)HLCombat.HoldTypes.Rifle ); // TODO this is shit
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		SetHoldType(HLCombat.HoldTypes.Rifle, anim);
+		//anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 
 }

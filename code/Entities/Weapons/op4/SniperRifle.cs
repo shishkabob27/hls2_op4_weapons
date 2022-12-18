@@ -1,5 +1,6 @@
 ﻿using Sandbox;
-using SandboxEditor;
+using Editor;
+
 [Library( "weapon_sniperrifle" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_m40a1.vmdl" )]
 [Title( "Sniper Rifle" ), Category( "Weapons" ), MenuCategory( "Opposing Force" )]
@@ -21,7 +22,7 @@ partial class SniperRifle : Weapon
 	public bool Zoomed { get; set; } = false;
 
 	private float? LastFov;
-	private float? LastViewmodelFov;
+	//private float? LastViewmodelFov;
 
 	public override void Spawn()
 	{
@@ -56,7 +57,7 @@ partial class SniperRifle : Weapon
 
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
@@ -67,49 +68,49 @@ partial class SniperRifle : Weapon
 		//Zoomed = Input.Down( InputButton.SecondaryAttack );
 	}
 
-	public override void PostCameraSetup( ref CameraSetup camSetup )
+	public void PostCameraSetup()
 	{
-		base.PostCameraSetup( ref camSetup );
+		//base.PostCameraSetup( ref camSetup );
 
-		float targetFov = camSetup.FieldOfView;
-		float targetViewmodelFov = camSetup.ViewModel.FieldOfView;
-		LastFov = LastFov ?? camSetup.FieldOfView;
-		LastViewmodelFov = LastViewmodelFov ?? camSetup.ViewModel.FieldOfView;
+		float targetFov = Camera.FieldOfView;
+		//float targetViewmodelFov = Camera.ViewModel.FieldOfView;
+		LastFov = LastFov ?? Camera.FieldOfView;
+		//LastViewmodelFov = LastViewmodelFov ?? Camera.ViewModel.FieldOfView;
 
 		if ( Zoomed )
 		{
 			targetFov = 18.0f;
-			targetViewmodelFov = 0.0f;
+			//targetViewmodelFov = 0.0f;
 		}
 
 		float lerpedFov = LastFov.Value.LerpTo( targetFov, Time.Delta * 24.0f );
-		float lerpedViewmodelFov = LastViewmodelFov.Value.LerpTo( targetViewmodelFov, Time.Delta * 24.0f );
+		//float lerpedViewmodelFov = LastViewmodelFov.Value.LerpTo( targetViewmodelFov, Time.Delta * 24.0f );
 
-		camSetup.FieldOfView = targetFov;
-		camSetup.ViewModel.FieldOfView = targetViewmodelFov;
+		Camera.FieldOfView = targetFov;
+		//Camera.ViewModel.FieldOfView = targetViewmodelFov;
 
 		LastFov = lerpedFov;
-		LastViewmodelFov = lerpedViewmodelFov;
+		//LastViewmodelFov = lerpedViewmodelFov;
 	}
 
-	public override void BuildInput( InputBuilder owner )
+	public override void BuildInput()
 	{
 		if ( Zoomed )
 		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, 0.2f );
+			(Owner as HLPlayer).ViewAngles = Angles.Lerp( (Owner as HLPlayer).OriginalViewAngles, (Owner as HLPlayer).ViewAngles, 0.2f );
 		}
 	}
 
 	[ClientRpc]
 	protected override void ShootEffectsRPC()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", (int)HLCombat.HoldTypes.Crossbow ); // TODO this is shit
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		SetHoldType(HLCombat.HoldTypes.Crossbow, anim);
+		//anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 }

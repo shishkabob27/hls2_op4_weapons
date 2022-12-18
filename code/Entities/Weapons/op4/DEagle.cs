@@ -1,5 +1,5 @@
 ﻿using Sandbox;
-using SandboxEditor;
+using Editor;
 [Library( "weapon_eagle" ), HammerEntity]
 [EditorModel( "models/op4/weapons/world/w_desert_eagle.vmdl" )]
 [Title( "Desert Eagle" ), Category( "Weapons" ), MenuCategory("Opposing Force")]
@@ -76,12 +76,12 @@ partial class DEagle : Weapon
 	public override void AttackSecondary()
 	{
 		base.AttackSecondary();
-		if ( !isLaserOn && IsServer )
+		if ( !isLaserOn && Game.IsServer )
 		{
 			Dot = new LaserDot();
 			isLaserOn = true;
 		}
-		else if ( IsServer )
+		else if ( Game.IsServer )
 		{
 			Dot.Delete();
 			Dot = null;
@@ -89,7 +89,7 @@ partial class DEagle : Weapon
 		}
 	}
 
-	public override void Simulate( Client owner )
+	public override void Simulate( IClient owner )
 	{
 		base.Simulate( owner );
 		if ( Owner is not HLPlayer ply ) return;
@@ -107,7 +107,7 @@ partial class DEagle : Weapon
 	{
 		base.ActiveEnd( ent, dropped );
 
-		if ( isLaserOn && IsServer )
+		if ( isLaserOn && Game.IsServer )
 		{
 			Dot.Delete();
 			Dot = null;

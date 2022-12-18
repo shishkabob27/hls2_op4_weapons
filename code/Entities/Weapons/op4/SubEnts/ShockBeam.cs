@@ -33,7 +33,7 @@ public partial class ShockBeam : Entity
 	[Event.Tick.Server]
 	public virtual void Tick()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		if ( Stuck ){
@@ -71,7 +71,7 @@ public partial class ShockBeam : Entity
 													.UsingTraceResult( tr )
 													.WithAttacker( Owner )
 													.WithWeapon( this )
-													.WithFlag( DamageFlags.DoNotGib );
+													.WithTag( DamageFlags.DoNotGib );
 
 				tr.Entity.TakeDamage( damageInfo );
 			}
