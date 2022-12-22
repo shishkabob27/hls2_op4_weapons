@@ -18,6 +18,7 @@ partial class PipeWrench : Weapon
 
 	public override string InventoryIcon => "/ui/op4/weapons/weapon_pipewrench.png";
 	public override string InventoryIconSelected => "/ui/op4/weapons/weapon_pipewrench_selected.png";
+	public override string CrosshairIcon => "/ui/crosshairs/crosshair0.png";
 	public override void Spawn()
 	{
 		base.Spawn();

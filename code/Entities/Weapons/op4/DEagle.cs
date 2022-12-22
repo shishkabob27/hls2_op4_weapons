@@ -17,6 +17,7 @@ partial class DEagle : Weapon
 	public override string AmmoIcon => "ui/ammo2.png";
 	public override string InventoryIcon => "/ui/op4/weapons/weapon_eagle.png";
 	public override string InventoryIconSelected => "/ui/op4/weapons/weapon_eagle_selected.png";
+	public override string CrosshairIcon => "/ui/op4/crosshairs/crosshair1.png";
 	LaserDot Dot;
 
 	[Net]

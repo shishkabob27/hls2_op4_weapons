@@ -13,6 +13,7 @@ class ShockRifle : Weapon
 	public override string AmmoIcon => "/ui/op4/ammo_plasma.png";
     public override string InventoryIcon => "/ui/op4/weapons/weapon_shockrifle.png";
     public override string InventoryIconSelected => "/ui/op4/weapons/weapon_shockrifle_selected.png";
+	public override string CrosshairIcon => "/ui/op4/crosshairs/crosshair4.png";
 	public override int ClipSize => -1;
     public override float PrimaryRate => 0.1f;
 

@@ -15,7 +15,8 @@ partial class M249 : Weapon
     public override int BucketWeight => 1;
     public override string InventoryIcon => "/ui/op4/weapons/weapon_m249.png";
     public override string InventoryIconSelected => "/ui/op4/weapons/weapon_m249_selected.png";
-    public override void Spawn()
+	public override string CrosshairIcon => "/ui/op4/crosshairs/crosshair2.png";
+	public override void Spawn()
 	{
 		base.Spawn();
 

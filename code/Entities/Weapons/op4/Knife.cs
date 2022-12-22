@@ -19,6 +19,7 @@ partial class Knife : Weapon
 
 	public override string InventoryIcon => "/ui/op4/weapons/weapon_knife.png";
 	public override string InventoryIconSelected => "/ui/op4/weapons/weapon_knife_selected.png";
+	public override string CrosshairIcon => "/ui/crosshairs/crosshair0.png";
 	public override void Spawn()
 	{
 		base.Spawn();

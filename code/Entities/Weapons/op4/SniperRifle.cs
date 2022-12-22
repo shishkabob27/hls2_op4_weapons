@@ -17,6 +17,7 @@ partial class SniperRifle : Weapon
 	public override int BucketWeight => 3;
 	public override string InventoryIcon => "/ui/op4/weapons/weapon_sniperrifle.png";
 	public override string InventoryIconSelected => "/ui/op4/weapons/weapon_sniperrifle_selected.png";
+	public override string CrosshairIcon => "/ui/op4/crosshairs/crosshair7.png";
 
 	[Net, Predicted]
 	public bool Zoomed { get; set; } = false;
